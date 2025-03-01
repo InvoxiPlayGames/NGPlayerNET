@@ -52,7 +52,14 @@ namespace NGPlayerNET
 
             // silly workaround for Windows 10/11 trying to use TLSv1...?
             // Windows 7 is using TLSv1.2 for this by default so idk what 10 got goin on
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            try
+            {
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            }
+            catch (Exception)
+            {
+                // service not supported. i didn't catch this LMAO
+            }
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.UserAgent = "NGPlayerNET/" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
