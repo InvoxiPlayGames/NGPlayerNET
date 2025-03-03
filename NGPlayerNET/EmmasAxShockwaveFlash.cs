@@ -13,11 +13,16 @@ namespace NGPlayerNET
 {
     class EmmasAxShockwaveFlash : AxShockwaveFlash
     {
+#if ARCH_X64
+        private static string LocalFlash_32_r465 = "Flash_32r465_64.ocx";
+        private static string LocalFlash_32_r371 = "Flash_32r371_64.ocx";
+#else
         private static string LocalFlash_32_r465 = "Flash_32r465.ocx";
         private static string LocalFlash_32_r371 = "Flash_32r371.ocx";
         private static string LocalFlash_11_1_r102_55 = "Flash_11_1r102_55.ocx";
         private static string LocalFlash_9_r289 = "Flash_9r289.ocx";
         private static string LocalFlash_7_r73 = "Flash_7r73.ocx";
+#endif
 
         private string loadedLocalFlash = null;
 
@@ -39,6 +44,7 @@ namespace NGPlayerNET
             if ((osMajorVersion >= 6 || (osMajorVersion == 5 && osMinorVersion >= 1))
                 && File.Exists(cd + LocalFlash_32_r465))
                 return cd + LocalFlash_32_r465;
+#if !ARCH_X64
             // Windows 2000
             if (osMajorVersion >= 5 && File.Exists(cd + LocalFlash_11_1_r102_55))
                 return cd + LocalFlash_11_1_r102_55;
@@ -49,33 +55,31 @@ namespace NGPlayerNET
             // Windows 95
             if (osMajorVersion >= 4 && File.Exists(cd + LocalFlash_7_r73))
                 return cd + LocalFlash_7_r73;
+#endif
 
             return null;
         }
 
         protected override object CreateInstanceCore(Guid clsid)
         {
-            // get the latest local flash version available to us, failing out if we don't have any
+            // get the latest local flash version available to us along with the currently installed one
             string localFlash = GetLocalFlashName();
-            if (localFlash == null)
-            {
-                return base.CreateInstanceCore(clsid);
-            }
+
+            string installedFlash = FlashDetection.GetInstalledFlashPath();
 
             // check if we already have a flash player installed
-            string installedFlash = FlashDetection.GetInstalledFlashPath();
             if (installedFlash != null && installedFlash != "")
             {
                 // if it's newer than the one we have pre-packaged, use that
                 Version localVersion = FlashDetection.GetFlashVersion(localFlash);
                 Version installedVersion = FlashDetection.GetFlashVersion(installedFlash);
-                if (installedVersion.CompareTo(localVersion) >= 0)
+                if (localVersion == null || installedVersion.CompareTo(localVersion) > 0)
                 {
                     // really greasy - patch the timebomb even on installed copies of r387+
                     if (NoFlashTimebomb.NeedsTimebombPatch(installedVersion))
                     {
                         IntPtr installedModule = Win32NativeCOM.LoadLibrary(installedFlash);
-                        if (NoFlashTimebomb.PatchFlashTimebombHandle(installedModule) == 0)
+                        if (NoFlashTimebomb.PatchFlashTimebombHandle(installedModule) <= 0)
                         {
                             MessageBox.Show("Timebomb patch failed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
@@ -83,6 +87,13 @@ namespace NGPlayerNET
                     return base.CreateInstanceCore(clsid);
                 }
             }
+
+            // fall back
+            if (localFlash == null)
+            {
+                return base.CreateInstanceCore(clsid);
+            }
+
 
             // load our local Flash Player ActiveX component and get DllGetClassObject
             IntPtr hModule = Win32NativeCOM.LoadLibrary(localFlash);
@@ -92,7 +103,7 @@ namespace NGPlayerNET
             // patch the timebomb if it has one
             if (NoFlashTimebomb.NeedsTimebombPatch(FlashDetection.GetFlashVersion(localFlash)))
             {
-                if (NoFlashTimebomb.PatchFlashTimebombHandle(hModule) == 0)
+                if (NoFlashTimebomb.PatchFlashTimebombHandle(hModule) <= 0)
                 {
                     MessageBox.Show("Timebomb patch failed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }

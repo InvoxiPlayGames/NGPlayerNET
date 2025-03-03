@@ -96,7 +96,15 @@ You should probably just use the standalone Flash Player projector instead.
 
 ## Building
 
-Use Visual Studio 2010.
+**32-bit**: Use Visual Studio 2010 or later on a system with Flash Player's
+32-bit ActiveX component installed.
+
+**64-bit**: Use Visual Studio 2022 or later on a system with Flash Player's
+64-bit ActiveX component installed. You might get lucky with older versions of
+VS.
+
+If you're on Windows 8.1, 10 or 11, you need to use `regsvr32` to register Flash
+Player before Visual Studio will let you build it.
 
 ## Shoutouts
 

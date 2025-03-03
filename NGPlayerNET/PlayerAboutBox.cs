@@ -68,7 +68,11 @@ namespace NGPlayerNET
             string clr = string.Format("{0}.{1}.{2}", clrVersion.Major, clrVersion.Minor, clrVersion.Build);
 
             // set the info label
+#if ARCH_X64
+            osInfoLabel.Text = string.Format("Running on 64-bit {0}, .NET {1}", osName, clr);
+#else
             osInfoLabel.Text = string.Format("Running on {0}, .NET Framework {1}", osName, clr);
+#endif
 
             // get the flash version
             int flashMajorVersion = ((flashVersionInt >> 16) & 0x7FFF);
