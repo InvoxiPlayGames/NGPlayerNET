@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using ShockwaveFlashObjects;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace NGPlayerNET
 {
@@ -29,24 +30,25 @@ namespace NGPlayerNET
         {
             int osMajorVersion = Environment.OSVersion.Version.Major;
             int osMinorVersion = Environment.OSVersion.Version.Minor;
+            string cd = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\";
 
             // Windows XP and later (5.1+)
             if ((osMajorVersion >= 6 || (osMajorVersion == 5 && osMinorVersion >= 1))
-                && File.Exists(LocalFlash_32_r371))
-                return LocalFlash_32_r371;
+                && File.Exists(cd + LocalFlash_32_r371))
+                return cd + LocalFlash_32_r371;
             if ((osMajorVersion >= 6 || (osMajorVersion == 5 && osMinorVersion >= 1))
-                && File.Exists(LocalFlash_32_r465))
-                return LocalFlash_32_r465;
+                && File.Exists(cd + LocalFlash_32_r465))
+                return cd + LocalFlash_32_r465;
             // Windows 2000
-            if (osMajorVersion >= 5 && File.Exists(LocalFlash_11_1_r102_55))
-                return LocalFlash_11_1_r102_55;
+            if (osMajorVersion >= 5 && File.Exists(cd + LocalFlash_11_1_r102_55))
+                return cd + LocalFlash_11_1_r102_55;
             // Windows 98/ME
             if (osMajorVersion >= 4 && (osMajorVersion >= 5 || osMinorVersion >= 10)
-                && File.Exists(LocalFlash_9_r289))
-                return LocalFlash_9_r289;
+                && File.Exists(cd + LocalFlash_9_r289))
+                return cd + LocalFlash_9_r289;
             // Windows 95
-            if (osMajorVersion >= 4 && File.Exists(LocalFlash_7_r73))
-                return LocalFlash_7_r73;
+            if (osMajorVersion >= 4 && File.Exists(cd + LocalFlash_7_r73))
+                return cd + LocalFlash_7_r73;
 
             return null;
         }
