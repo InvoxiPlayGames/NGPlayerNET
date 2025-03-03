@@ -19,6 +19,8 @@ namespace NGPlayerNET
         PortalSWFMeta cachedMeta = null;
         string loadedFilename = null;
 
+        int flashVersion = 0;
+
         public PlayerMain()
         {
             InitializeComponent();
@@ -151,29 +153,42 @@ namespace NGPlayerNET
 
         private void PlayerMain_Load(object sender, EventArgs e)
         {
+            // if we're running a debug build we want useful logs for this bull shit
+#if !DEBUG
             try
+#endif
             {
-                flash = new AxShockwaveFlash();
+                flash = new EmmasAxShockwaveFlash();
                 flashContainerPanel.Controls.Add(flash);
                 flash.Dock = DockStyle.Fill;
                 flash.Visible = true;
                 Update();
+                flashVersion = ((flash.FlashVersion() >> 16) & 0x7F);
                 flash.Movie = "about:blank";
             }
+#if !DEBUG
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to initialise Flash Player! Please make sure all the files are extracted, and you have Flash Player 9 or later installed.\n\n" + ex.Message, "Fatal Error - NGPlayerNET", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
+#endif
 
             EnableDisableControls(false);
 
             if (Program.Arguments.Length >= 1)
             {
-                string auth = null;
-                int issuedPortalID = NGAPI.GetPortalIDFromURL(Program.Arguments[0], out auth);
-                if (issuedPortalID > 0)
-                    LoadNGFlash(issuedPortalID, auth);
+                if (File.Exists(Program.Arguments[0]))
+                {
+                    LoadGenericSWF(Program.Arguments[0]);
+                }
+                else
+                {
+                    string auth = null;
+                    int issuedPortalID = NGAPI.GetPortalIDFromURL(Program.Arguments[0], out auth);
+                    if (issuedPortalID > 0)
+                        LoadNGFlash(issuedPortalID, auth);
+                }
             }
         }
 
@@ -215,7 +230,12 @@ namespace NGPlayerNET
 
         private void aboutNGPlayerNETToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PlayerAboutBox pab = new PlayerAboutBox(flash.FlashVersion(), loadedFilename, cachedMeta);
+            string localFlashVersion = null;
+            if (flash is EmmasAxShockwaveFlash)
+            {
+                localFlashVersion = (flash as EmmasAxShockwaveFlash).GetLocalFlashVersion();
+            }
+            PlayerAboutBox pab = new PlayerAboutBox(flash.FlashVersion(), loadedFilename, cachedMeta, localFlashVersion);
             pab.ShowDialog();
         }
 

@@ -14,7 +14,7 @@ namespace NGPlayerNET
 {
     public partial class PlayerAboutBox : Form
     {
-        public PlayerAboutBox(int flashVersionInt, string moviePath = null, PortalSWFMeta swfMeta = null)
+        public PlayerAboutBox(int flashVersionInt, string moviePath = null, PortalSWFMeta swfMeta = null, string localFlashVersion = null)
         {
             InitializeComponent();
 
@@ -71,25 +71,34 @@ namespace NGPlayerNET
             osInfoLabel.Text = string.Format("Running on {0}, .NET Framework {1}", osName, clr);
 
             // get the flash version
-            int flashMajorVersion = ((flashVersionInt >> 16) & 0x7F);
+            int flashMajorVersion = ((flashVersionInt >> 16) & 0x7FFF);
+            string flashBrandName = flashMajorVersion < 9 ? "Macromedia" : "Adobe";
             string flashVersionFormat = "{0} Flash Player version {1}";
             string flashVersionRegistry = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Macromedia\FlashPlayer", "CurrentVersion", null);
+            Version flashVersionInstalled = FlashDetection.GetFlashVersion(FlashDetection.GetInstalledFlashPath());
             string flashVersion;
-            if (flashVersionRegistry == null)
+            if (localFlashVersion != null)
             {
-                flashVersion = string.Format(flashVersionFormat, flashMajorVersion < 9 ? "Macromedia" : "Adobe", flashMajorVersion);
+                flashVersion = string.Format(flashVersionFormat, flashBrandName, localFlashVersion + " (included)");
             }
-            // i've never seen a flash do this but what if it does
-            else if ((flashVersionInt & 0xFFFF) > 0)
+            else if (flashVersionInstalled != null)
             {
-                int flashMinorVersion = ((flashVersionInt >> 8) & 0x7F);
-                int flashRevision = ((flashVersionInt) & 0x7F);
-                string flashVersionString = string.Format("{0}.{1}.{2}", flashMajorVersion, flashMinorVersion, flashRevision);
-                flashVersion = string.Format(flashVersionFormat, flashMajorVersion < 9 ? "Macromedia" : "Adobe", flashVersionString);
+                flashVersion = string.Format(flashVersionFormat, flashBrandName, flashVersionInstalled);
+            }
+            // Flash 10.x and 11.x do this
+            else if ((flashVersionInt & 0xFFFF) > 0 && flashVersionRegistry == null)
+            {
+                int flashMinorVersion = ((flashVersionInt) & 0x7FFF);
+                string flashVersionString = string.Format("{0}.{1}", flashMajorVersion, flashMinorVersion);
+                flashVersion = string.Format(flashVersionFormat, flashBrandName, flashVersionString);
+            }
+            else if (flashVersionRegistry == null)
+            {
+                flashVersion = string.Format(flashVersionFormat, flashBrandName, flashMajorVersion);
             }
             else
             {
-                flashVersion = string.Format(flashVersionFormat, flashMajorVersion < 9 ? "Macromedia" : "Adobe", flashVersionRegistry.Replace(',', '.'));
+                flashVersion = string.Format(flashVersionFormat, flashBrandName, flashVersionRegistry.Replace(',', '.'));
             }
             flashInfoLabel.Text = flashVersion;
 

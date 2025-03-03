@@ -47,13 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlashDetection.cs" />
     <Compile Include="LoadNGFlashBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoadNGFlashBox.Designer.cs">
       <DependentUpon>LoadNGFlashBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmmasAxShockwaveFlash.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="NGAPI.cs" />
+    <Compile Include="NoFlashTimebomb.cs" />
     <Compile Include="PlayerAboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +81,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="URIHandlerManager.cs" />
+    <Compile Include="Win32NativeCOM.cs" />
     <EmbeddedResource Include="LoadNGFlashBox.resx">
       <DependentUpon>LoadNGFlashBox.cs</DependentUpon>
     </EmbeddedResource>

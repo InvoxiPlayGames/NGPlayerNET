@@ -13,8 +13,8 @@ namespace NGPlayerNET
         public static bool AlwaysUseHTTPMirror = false;
         public static bool DisallowHTTPMirror = false;
         //public static bool ResizeSWFToWindow = true;
-        public static int DefaultExternalWidth = 640;
-        public static int DefaultExternalHeight = 360;
+        public static int DefaultExternalWidth = 550;
+        public static int DefaultExternalHeight = 400;
 
         // dumb ini shit
         [DllImport("kernel32")]

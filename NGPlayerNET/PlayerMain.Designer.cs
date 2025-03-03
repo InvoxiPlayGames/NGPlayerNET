@@ -32,6 +32,12 @@
             this.playerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadNewgroundsFlashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSWFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.unloadSWFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.currentFlashNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentFlashAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewOnNewgroundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flashQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.highQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,15 +45,9 @@
             this.lowQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherQualityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutNGPlayerNETToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nGPlayerNETSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutNGPlayerNETToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flashContainerPanel = new System.Windows.Forms.Panel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.unloadSWFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.currentFlashNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentFlashAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewOnNewgroundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +93,46 @@
             this.loadSWFToolStripMenuItem.Text = "Load local SWF...";
             this.loadSWFToolStripMenuItem.Click += new System.EventHandler(this.loadSWFToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
+            // 
+            // unloadSWFToolStripMenuItem
+            // 
+            this.unloadSWFToolStripMenuItem.Name = "unloadSWFToolStripMenuItem";
+            this.unloadSWFToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.unloadSWFToolStripMenuItem.Text = "Unload SWF";
+            this.unloadSWFToolStripMenuItem.Click += new System.EventHandler(this.unloadSWFToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(207, 6);
+            // 
+            // currentFlashNameToolStripMenuItem
+            // 
+            this.currentFlashNameToolStripMenuItem.Enabled = false;
+            this.currentFlashNameToolStripMenuItem.Name = "currentFlashNameToolStripMenuItem";
+            this.currentFlashNameToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.currentFlashNameToolStripMenuItem.Text = "Current Flash Name";
+            // 
+            // currentFlashAuthorToolStripMenuItem
+            // 
+            this.currentFlashAuthorToolStripMenuItem.Enabled = false;
+            this.currentFlashAuthorToolStripMenuItem.Name = "currentFlashAuthorToolStripMenuItem";
+            this.currentFlashAuthorToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.currentFlashAuthorToolStripMenuItem.Text = "Current Flash Author";
+            this.currentFlashAuthorToolStripMenuItem.Visible = false;
+            // 
+            // viewOnNewgroundsToolStripMenuItem
+            // 
+            this.viewOnNewgroundsToolStripMenuItem.Name = "viewOnNewgroundsToolStripMenuItem";
+            this.viewOnNewgroundsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.viewOnNewgroundsToolStripMenuItem.Text = "View on Newgrounds";
+            this.viewOnNewgroundsToolStripMenuItem.Visible = false;
+            this.viewOnNewgroundsToolStripMenuItem.Click += new System.EventHandler(this.viewOnNewgroundsToolStripMenuItem_Click);
+            // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -109,7 +149,7 @@
             this.lowQualityToolStripMenuItem,
             this.otherQualityToolStripMenuItem});
             this.flashQualityToolStripMenuItem.Name = "flashQualityToolStripMenuItem";
-            this.flashQualityToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.flashQualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.flashQualityToolStripMenuItem.Text = "Flash Quality";
             this.flashQualityToolStripMenuItem.DropDownOpening += new System.EventHandler(this.flashQualityToolStripMenuItem_DropDownOpening);
             // 
@@ -150,19 +190,19 @@
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem1.Text = "About";
             // 
-            // aboutNGPlayerNETToolStripMenuItem
-            // 
-            this.aboutNGPlayerNETToolStripMenuItem.Name = "aboutNGPlayerNETToolStripMenuItem";
-            this.aboutNGPlayerNETToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.aboutNGPlayerNETToolStripMenuItem.Text = "About NGPlayerNET...";
-            this.aboutNGPlayerNETToolStripMenuItem.Click += new System.EventHandler(this.aboutNGPlayerNETToolStripMenuItem_Click);
-            // 
             // nGPlayerNETSettingsToolStripMenuItem
             // 
             this.nGPlayerNETSettingsToolStripMenuItem.Name = "nGPlayerNETSettingsToolStripMenuItem";
             this.nGPlayerNETSettingsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.nGPlayerNETSettingsToolStripMenuItem.Text = "NGPlayerNET Settings";
             this.nGPlayerNETSettingsToolStripMenuItem.Click += new System.EventHandler(this.nGPlayerNETSettingsToolStripMenuItem_Click);
+            // 
+            // aboutNGPlayerNETToolStripMenuItem
+            // 
+            this.aboutNGPlayerNETToolStripMenuItem.Name = "aboutNGPlayerNETToolStripMenuItem";
+            this.aboutNGPlayerNETToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.aboutNGPlayerNETToolStripMenuItem.Text = "About NGPlayerNET...";
+            this.aboutNGPlayerNETToolStripMenuItem.Click += new System.EventHandler(this.aboutNGPlayerNETToolStripMenuItem_Click);
             // 
             // flashContainerPanel
             // 
@@ -172,46 +212,6 @@
             this.flashContainerPanel.Name = "flashContainerPanel";
             this.flashContainerPanel.Size = new System.Drawing.Size(489, 286);
             this.flashContainerPanel.TabIndex = 1;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
-            // 
-            // unloadSWFToolStripMenuItem
-            // 
-            this.unloadSWFToolStripMenuItem.Name = "unloadSWFToolStripMenuItem";
-            this.unloadSWFToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.unloadSWFToolStripMenuItem.Text = "Unload SWF";
-            this.unloadSWFToolStripMenuItem.Click += new System.EventHandler(this.unloadSWFToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(207, 6);
-            // 
-            // currentFlashNameToolStripMenuItem
-            // 
-            this.currentFlashNameToolStripMenuItem.Enabled = false;
-            this.currentFlashNameToolStripMenuItem.Name = "currentFlashNameToolStripMenuItem";
-            this.currentFlashNameToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.currentFlashNameToolStripMenuItem.Text = "Current Flash Name";
-            // 
-            // currentFlashAuthorToolStripMenuItem
-            // 
-            this.currentFlashAuthorToolStripMenuItem.Enabled = false;
-            this.currentFlashAuthorToolStripMenuItem.Name = "currentFlashAuthorToolStripMenuItem";
-            this.currentFlashAuthorToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.currentFlashAuthorToolStripMenuItem.Text = "Current Flash Author";
-            this.currentFlashAuthorToolStripMenuItem.Visible = false;
-            // 
-            // viewOnNewgroundsToolStripMenuItem
-            // 
-            this.viewOnNewgroundsToolStripMenuItem.Name = "viewOnNewgroundsToolStripMenuItem";
-            this.viewOnNewgroundsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.viewOnNewgroundsToolStripMenuItem.Text = "View on Newgrounds";
-            this.viewOnNewgroundsToolStripMenuItem.Visible = false;
-            this.viewOnNewgroundsToolStripMenuItem.Click += new System.EventHandler(this.viewOnNewgroundsToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 

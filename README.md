@@ -16,12 +16,17 @@ Fun project. I was fascinated by the Newgrounds Player but felt like it was
 missing a few nice to haves, as well as a huge missed opportunity not working
 on anything lower than Windows 7 with latest updates installed.
 
-The only real difference between this and a typical Flash projector is that it
-can automatically fetch a SWF when given a Newgrounds link, as well as having
+The biggest difference between this and a typical Flash projector is that it can
+automatically fetch a SWF when given a Newgrounds link, as well as having
 functional Newgrounds medals and leaderboards support when launched via
 Newgrounds.com. [Achievement Unlocked 2](https://www.newgrounds.com/portal/view/553791)
 by jmtb02 (also on [Steam](https://store.steampowered.com/app/2274110/)) is a
 good game.
+
+It also has Flash Player embedded and doesn't need it installed system-wide -
+and will automatically patch the timebomb out of any up-to-date system wide
+Flash Players while in use
+(using [NoFlashTimebomb](https://github.com/InvoxiPlayGames/NoFlashTimebomb)).
 
 For anything reliable on Windows 7 and up, check out and use the official
 [Newgrounds Player](https://www.newgrounds.com/flash/player).
@@ -41,26 +46,20 @@ in the NGPlayerNET Settings.
 
 ### System Requirements
 
-- Windows 98 Second Edition, 2000, XP, Vista, 7, 8.1, 10 or 11 - with the latest
-  updates installed.
+- Windows 98 Second Edition, ME, 2000, XP, Vista, 7, 8.1, 10 or 11 - with the
+  latest updates installed.
 - At least 128MB RAM
-- .NET Framework 2.0 *(included in Vista+, included in download)*
-- Adobe Flash Player version 9 or later installed for IE/ActiveX *(included in download)*
-   - **Windows 98**: Flash Player 9.0.289.0
-   - **Windows 2000**: Flash Player 11.1.102.55
-   - **Windows XP and later**: Flash Player 32.0.0.371 or patched Flash Player 32.0.0.445
+- .NET Framework 2.0
 - If on Windows 98, you'll need a ZIP file extractor such as 7-Zip.
-
-*It might be annoying to install Flash Player ActiveX on Windows 8.1, 10 or 11,
-you might just want to install [Newgrounds Player](https://www.newgrounds.com/flash/player)
-first to make sure you have a working Flash Player ActiveX control.*
 
 ### Install Instructions
 
-1. Download the release package ZIP from the [releases page](https://github.com/InvoxiPlayGames/NGPlayerNET/releases).
+1. Download the release package ZIP for your Windows version from the
+   [releases page](https://github.com/InvoxiPlayGames/NGPlayerNET/releases).
     - A HTTP-supporting mirror is hosted at http://ipg.pw/ngplayernet/
 2. Extract it somewhere safe on your computer.
-3. If needed, install .NET and Flash Player from the "Redistributables" folder.
+3. *(Windows 7 and older only*) If needed, install .NET Framework 2.0 from the
+   "Redistributables" folder.
 4. Launch NGPlayerNET.exe.
 
 ### Using the Program
